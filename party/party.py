@@ -33,6 +33,11 @@ def sortSchedule(schedule):
 
 
 def findMaxParticipant(schedule):
+    """
+    파티에 참가하는 사람들의 timeline을 시작시간, 끝시간만 가져와 분해 후 먼저 정렬한다.
+    이후 처음부터 탐색하며 시작시간일 경우 현재 참가자 + 1, 끝시간일 경우 현재 참가자 - 1을 적용해
+    참가자가 지금까지의 max보다 많아지면 계속 갱신해 나가면서 가장 참가자가 많은 시간을 찾아낸다.
+    """
     timeline = []
     for i in schedule:
         timeline.append((i[0], "start"))
@@ -54,6 +59,24 @@ def findMaxParticipant(schedule):
     return (maxParticipant, maxTime)
 
 
+def comparision(schedule):
+    maxTime = maxParticipant = 0
+    for i in schedule:
+        curr = 1
+        start = i[0]
+        for j in schedule:
+            if i == j:
+                continue
+            else:
+                if start >= j[0] and start < j[1]:
+                    curr = curr + 1
+        if curr > maxParticipant:
+            maxParticipant = curr
+            maxTime = start
+
+    return (maxParticipant, maxTime)
+
+
 schedule = [
     (6, 8),
     (6, 12),
@@ -69,6 +92,7 @@ schedule = [
     (11, 12),
 ]
 
+
 print(
     bruteFindMaxParticipant(schedule)[1],
     "'O clock,",
@@ -78,4 +102,8 @@ print(
 
 print(
     findMaxParticipant(schedule)[1], "'O clock,", findMaxParticipant(schedule)[0], "people",
+)
+
+print(
+    comparision(schedule)[1], "'O clock,", comparision(schedule)[0], "people",
 )
