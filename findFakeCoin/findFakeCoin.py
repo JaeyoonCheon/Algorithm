@@ -84,7 +84,7 @@ def balancing(list):
 
     group1, group2, group3 = splitCoinGroup(currList)
     currList, weight = fakeCoinGroup(group1, group2, group3)
-    compared += 1
+    compared += 2
     while len(currList) > 1:
         group1, group2, group3 = splitCoinGroup(currList)
         currList = weightedfakeCoinGroup(group1, group2, group3, weight)
