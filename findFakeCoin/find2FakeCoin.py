@@ -7,25 +7,18 @@ def compareGroup(A, B):
         return "equal"
 
 
-def weightedfakeCoinGroup(A, B, C, weight):
+def weightedfakeCoinGroup(A, B, C):
     """
     이 함수는 fake coin이 무겁다는 전제 하에 작성
     """
     result = compareGroup(A, B)
-    if weight == "heavy":
-        if result == "left":
-            return A
-        elif result == "right":
-            return B
-        else:
-            return C
+
+    if result == "left":
+        return A
+    elif result == "right":
+        return B
     else:
-        if result == "left":
-            return B
-        elif result == "right":
-            return A
-        else:
-            return C
+        return C
 
 
 def fakeCoinGroup(A, B, C):
@@ -82,13 +75,19 @@ def balancing(list):
     compared = 0
     currList = list
 
-    group1, group2, group3 = splitCoinGroup(currList)
-    currList, weight = fakeCoinGroup(group1, group2, group3)
-    compared += 1
     while len(currList) > 1:
         group1, group2, group3 = splitCoinGroup(currList)
-        currList = weightedfakeCoinGroup(group1, group2, group3, weight)
+        currList = weightedfakeCoinGroup(group1, group2, group3)
         compared += 1
+
+        diffList = []
+        for i in [group1, group2, group3]:
+            if currList != i:
+                diffList = i
+                break
+
+        if sum(currList) < sum(diffList):
+            currList = diffList
 
     fakeCoin = currList[0]
     fakeCoinIdx = list.index(fakeCoin)
@@ -112,7 +111,7 @@ coinList = [
     10,
     10,
     10,
-    5,
+    15,
     10,
     10,
     10,
@@ -121,7 +120,7 @@ coinList = [
     10,
     10,
     10,
-    10,
+    15,
     10,
     10,
 ]

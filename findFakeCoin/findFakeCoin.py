@@ -9,7 +9,7 @@ def compareGroup(A, B):
 
 def weightedfakeCoinGroup(A, B, C, weight):
     """
-    이 함수는 fake coin이 무겁다는 전제 하에 작성
+    이 함수는 fake coin의 상대적인 크기를 아는 경우에 작동
     """
     result = compareGroup(A, B)
     if weight == "heavy":
