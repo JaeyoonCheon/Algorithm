@@ -68,7 +68,45 @@ def inviteOptimized(list, dislikePairs):
     return invite
 
 
-list = ["A", "B", "C", "D", "E"]
+def inviteOptimized2(invitelist, dislikePairs):
+    """
+    위 3개 함수를 통합하면서 가능한 조합의 경우를 저장하지 않고
+    바로 크기 비교를 진행하여 메모리 공간 절약
+    """
+    invite = []
+    always = invitelist.copy()
+
+    for i in dislikePairs:
+        if i[0] in always:
+            always.remove(i[0])
+        if i[1] in always:
+            always.remove(i[1])
+
+    invitelist = list(set(invitelist) - set(always))
+    n = len(invitelist)
+
+    for i in range(pow(2, n)):
+        combination = []
+        num = i
+        for j in range(n):
+            if num % 2 == 1:
+                combination = [invitelist[n - 1 - j]] + combination
+            num = num // 2
+        good = True
+        for j in dislikePairs:
+            if j[0] in combination and j[1] in combination:
+                good = False
+        if good:
+            if len(combination) > len(invite):
+                invite = combination
+
+    invite = list(set(invite) | set(always))
+    invite.sort()
+
+    return invite
+
+
+invitelist = ["A", "B", "C", "D", "E"]
 largeList = ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
 dislikePairs = [["A", "B"], ["B", "C"]]
 largeDislikePairs = [
@@ -82,3 +120,4 @@ largeDislikePairs = [
 ]
 print(invite(largeList, largeDislikePairs))
 print(inviteOptimized(largeList, largeDislikePairs))
+print(inviteOptimized2(largeList, largeDislikePairs))
