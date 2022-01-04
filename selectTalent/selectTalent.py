@@ -62,6 +62,50 @@ def makeCombinationOptimized(talent, candidate, candidateTalent):
     return pick
 
 
+def selectUniqueTalent(talent, candidate, candidateTalent):
+    uniqueCandidate = []
+    for t in talent:
+        count = 0
+        idx = -1
+        for i in candidateTalent:
+            if t in i:
+                count += 1
+                idx = candidateTalent.index(i)
+        if count == 1:
+            uniqueCandidate.append(candidate[idx])
+            talent.remove(t)
+
+    return uniqueCandidate, talent
+
+
+def makeCombinationOptimized2(talent, candidate, candidateTalent):
+    uniqueCandidate, talent = selectUniqueTalent(talent, candidate, candidateTalent)
+
+    for i in uniqueCandidate:
+        candidateTalent.pop(candidate.index(i))
+    candidate = list(set(candidate) - set(uniqueCandidate))
+    candidate.sort()
+
+    n = len(candidate)
+    pick = candidate[:]
+
+    for i in range(pow(2, n)):
+        num = i
+        combination = []
+        for j in range(n):
+            if num % 2 == 1:
+                combination = [candidate[n - j - 1]] + combination
+            num = num // 2
+        if best(combination, candidate, candidateTalent, talent):
+            if len(pick) > len(combination):
+                pick = combination
+
+    pick = list(set(pick) | set(uniqueCandidate))
+    pick.sort()
+
+    return pick
+
+
 talent = ["Sing", "Dance", "Magic", "Act", "Flex", "Code"]
 candidate = ["Aly", "Bob", "Cal", "Don", "Eve", "Fay"]
 candidateTalents = [
@@ -74,4 +118,5 @@ candidateTalents = [
 ]
 
 print(makeCombination(talent, candidate, candidateTalents))
-print(makeCombinationOptimized(talent, candidate, candidateTalents))
+print(makeCombinationOptimized(talent, candidate.copy(), candidateTalents.copy()))
+print(makeCombinationOptimized2(talent, candidate, candidateTalents))
