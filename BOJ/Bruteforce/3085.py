@@ -118,7 +118,7 @@ def findMaxCount(board, size):
     maxCount = 0
     for i in range(size):
         for j in range(size):
-            print(f"x: {i}, y: {j}")
+            # print(f"x: {i}, y: {j}")
             num = checkSeq(board, i, j, size)
             if maxCount < num:
                 maxCount = num
@@ -146,7 +146,7 @@ def swap2Block(candy, size):
                     maxCount = result
                 swap(temp, i, j, i + 1, j + 1)
 
-            if checkBorder(i + 1, j, size):
+            if checkBorder(i, j + 1, size):
                 swap(temp, i, j, i, j + 1)
                 result = findMaxCount(temp, size)
                 if maxCount < result:
@@ -168,7 +168,7 @@ size = int(input())
 candy = []
 
 for _ in range(size):
-    candy.append(input())
+    candy.append(list(input()))
 
 
 print(swap2Block(candy, size))
