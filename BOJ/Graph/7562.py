@@ -4,6 +4,7 @@
 1.  전형적인 BFS 최단거리 문제.
 
 2.  pypy3에서 sys.stdin.readline을 사용하면 통과
+    python3에서는 메모리 문제로 런타임 에러가 발생하는 것으로 생각됨
 """
 from collections import deque
 import sys
