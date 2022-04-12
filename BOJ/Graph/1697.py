@@ -23,29 +23,29 @@ visited[N] = True
 while q:
     curr = q.pop()
 
-    dx = curr[0]-1
+    dx = curr[0] - 1
     if dx == K:
         print(curr[1])
         break
-    if dx>0 and dx<=100000:
+    if dx > 0 and dx <= 100000:
         if visited[dx] != True:
             visited[dx] = True
-            q.appendleft((dx, curr[1]+1))
-    
-    dx = curr[0]+1
-    if dx == K:
-        print(curr[1])
-        break
-    if dx>0 and dx<=100000:
-        if visited[dx] != True:
-            visited[dx] = True
-            q.appendleft((dx, curr[1]+1))
+            q.appendleft((dx, curr[1] + 1))
 
-    dx = curr[0]*2
+    dx = curr[0] + 1
     if dx == K:
         print(curr[1])
         break
-    if dx>0 and dx<=100000:
+    if dx > 0 and dx <= 100000:
         if visited[dx] != True:
             visited[dx] = True
-            q.appendleft((dx, curr[1]+1))
+            q.appendleft((dx, curr[1] + 1))
+
+    dx = curr[0] * 2
+    if dx == K:
+        print(curr[1])
+        break
+    if dx > 0 and dx <= 100000:
+        if visited[dx] != True:
+            visited[dx] = True
+            q.appendleft((dx, curr[1] + 1))
