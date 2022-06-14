@@ -13,3 +13,20 @@ for i in range(N):
     step += 1
 
 print()
+
+
+def star(top, left, right):
+    if right - left <= 1:
+        paper[top][left] = "*"
+        return
+
+    half = (right - left) // 2
+    star(top, left + half // 2, right - half // 2)
+    star(top // 2, left, half)
+    star(top // 2, half, right)
+
+
+star(N, 0, 2 * N - 1)
+
+for line in paper:
+    print(line)
