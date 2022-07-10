@@ -63,7 +63,7 @@ def kruskal():
         _from, _to, _weight = map(int, sys.stdin.readline().split())
         edges.append((_from, _to, _weight))
 
-    sorted(edges, key=lambda x: (x[2], x[0], x[1]))
+    edges = sorted(edges, key=lambda x: (x[2], x[0], x[1]))
 
     for edge in edges:
         if union(edge[0], edge[1]):
