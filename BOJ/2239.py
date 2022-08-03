@@ -8,9 +8,12 @@
     결과가 나오지 않음
 
 2.  백트래킹
+    위의 기본 조건들을 가지고 빈 칸의 왼쪽 위부터 차례대로 하나 씩 가능한 수를 놓아보는
+    백트래킹을 접목했고 가능한 수를 작은 수부터 놓기 때문에 가장 먼저 찾게되는 가능한 정답이
+    모든 가능한 경우 중 가장 작은 수의 경우이다.
 """
 
-import copy
+import sys, copy
 
 puzzle = [list(map(int, list(input()))) for _ in range(9)]
 
@@ -52,7 +55,7 @@ def dfs(pos):
     isBlank = False
     for i in range(pos[0], 9):
         if i == pos[0]:
-            for j in range(pos[1] + 1, 9):
+            for j in range(pos[1], 9):
                 if puzzle[i][j] == 0:
                     isBlank = True
                     break
@@ -65,8 +68,9 @@ def dfs(pos):
             break
 
     if not isBlank:
-        case.append(copy.deepcopy(puzzle))
-        return
+        for i in range(9):
+            print("".join(str(c) for c in puzzle[i]))
+        sys.exit(0)
 
     nextPos = (i, j)
 
@@ -101,7 +105,7 @@ minIdx = -1
         minValue = num
         minIdx = idx """
 
-latestPuzzle = case[0]
+""" latestPuzzle = case[0]
 
 for i in range(9):
-    print("".join(str(c) for c in latestPuzzle[i]))
+    print("".join(str(c) for c in latestPuzzle[i])) """
