@@ -2,7 +2,7 @@
 1007번 벡터 매칭
 """
 
-import itertools
+import itertools, copy
 from math import sqrt
 
 T = int(input())
@@ -10,22 +10,27 @@ T = int(input())
 for _ in range(T):
     N = int(input())
 
-    vertexs = [list(map(int, input().split())) for _ in range(N)]
+    vectors = [list(map(int, input().split())) for _ in range(N)]
 
-    vertexsPerm = list(itertools.permutations(vertexs, 2))
+    total = [0, 0]
 
-    vectors = list(map(lambda x: (x[0][0] - x[1][0], x[0][1] - x[1][1]), vertexsPerm))
+    for i in vectors:
+        total[0] += i[0]
+        total[1] += i[1]
 
     vectorsComb = list(itertools.combinations(vectors, N // 2))
 
     def vectorSize(vectorMatch):
-        totalVector = [0, 0]
+        totalSum = copy.deepcopy(total)
+        matchingSum = [0, 0]
 
-        for v in vectorMatch:
-            totalVector[0] += v[0]
-            totalVector[1] += v[1]
+        for i in vectorMatch:
+            matchingSum[0] += i[0]
+            matchingSum[1] += i[1]
 
-        return sqrt(totalVector[0] ** 2 + totalVector[1] ** 2)
+        result = [totalSum[0] - matchingSum[0] * 2, totalSum[1] - matchingSum[1] * 2]
+
+        return sqrt(result[0] ** 2 + result[1] ** 2)
 
     vectorMatchings = list(map(vectorSize, vectorsComb))
 
