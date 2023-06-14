@@ -5,33 +5,37 @@
     2. 따라서, 선수마다 이름에 대한 순위를 mapping 해 놓고 인덱스를 O(1)시간에 찾는 방식으로 해결
 """
 
+
 def simpleSwap(players, callings):
     answer = []
-    
+
     for call in callings:
         idx = players.index(call)
-        
-        players[idx-1], players[idx] = players[idx], players[idx-1]
-    
+
+        players[idx - 1], players[idx] = players[idx], players[idx - 1]
+
     answer = players
     return answer
 
+
 def mapIndex(players, callings):
     dict = {}
-    
+
     for i, v in enumerate(players):
         dict[v] = i
-        
+
     for call in callings:
         idx = dict[call]
         beforePlayer = players[idx - 1]
-        
+
         players[idx - 1], players[idx] = players[idx], players[idx - 1]
         dict[call], dict[beforePlayer] = dict[beforePlayer], dict[call]
-        
+
     return players
+
 
 def solution(players, callings):
     return mapIndex(players, callings)
+
 
 solution()
