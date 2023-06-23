@@ -3,6 +3,7 @@
     
     1.  이진 트리를 주어진 문제의 예시대로 구현하여 preorder/postorder를 시행
     2.  노드의 정보로 주어진 리스트에 인덱스 번호를 추가하고, y좌표로 정렬하여 트리에 삽입해야 한다.
+    3.  재귀 깊이를 고려한 setrecursionlimit 조정 필요.
 """
 
 import sys
