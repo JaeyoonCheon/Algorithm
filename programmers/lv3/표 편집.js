@@ -34,18 +34,22 @@ function solution(n, k, cmd) {
           current = upside[current];
         }
       }
+
+      console.log(`selected ${current}`);
     } else {
       if (op === "C") {
         stack.push(current);
+        console.log(`deleted ${current}`);
 
         // 아래 행과 위 행을 연결
         upside[downside[current]] = upside[current];
         downside[upside[current]] = downside[current];
 
         // 행 이동
-        current = downside[current] > n ? upside[current] : downside[current];
+        current = downside[current] >= n ? upside[current] : downside[current];
       } else {
         const restored = stack.pop();
+        console.log(`restored ${restored}`);
 
         // 아래 행과 위 행에 현재 행 연결
         upside[downside[restored]] = restored;
